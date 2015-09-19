@@ -33,7 +33,15 @@ Accepts a multiarray or object `$data` which represents the rows of the table.
     'name' => 'Anon',  
     'id' => '2'  
     ],  
-  );  
+    );  
+    
+Will result in a table:
+
+
+| **Name**|  **Id**  |  
+| Maria  |  1   |  
+| Anon   |  2   |  
+
 
 ###Creating links for column data
 
