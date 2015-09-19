@@ -1,6 +1,6 @@
 # chtmltable
 
-A HTML helper to create a html table.  
+A HTML helper written in PHP to create a html table. Written for Anax-MVC.  
 First version includes the class `SimpleHTMLTable.php` and an example file, `simplehtmltable.php`.
 
 ## How to build a table
