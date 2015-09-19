@@ -4,27 +4,24 @@ namespace Meax\HTMLTable;
 
 class SimpleHTMLTable {
 
-
-	
-	/**
-	* Creates an HTML table from an array or object.
-	*
-	*/
-	
-	public function __construct() {
-	
-	  }
-	
+  /**
+  * Creates an HTML table from an array or object.
+  *
+  */
   
-	
-	/**
-	 * Build an html table
-	 *
-	 * @param array $columns containing label and corresponding name
-	 * @param array $values or @param object $values containing the data
-	 * 
-	 */
-	
+  public function __construct() {
+  }
+
+  
+
+    /**
+    * Build an html table
+    *
+    * @param array $columns containing label and corresponding name
+    * @param array $values or @param object $values containing the data
+    * 
+    */
+
     public function createTable($columns, $values=null, $tablename=null) {
     	
     $html = "<table id='".$tablename."'>";
@@ -79,7 +76,14 @@ class SimpleHTMLTable {
     $html .= "</table>";
     return $html;
   }
-	
+  
+    /**
+    * Support for converting values 
+    *
+    * @param $val the value to convert
+    * @param string $displaytype determines which switch case to go with
+    * @param string $format, which format to convert to, if any
+    */
 	
   public function getDisplayVal($val, $displaytype=null, $format=null) {
   	$displayval = $val;
