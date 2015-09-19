@@ -87,9 +87,9 @@ class SimpleHTMLTable {
   	  
   	  case 'yes-no':
   	  	  if (empty($val) || $val === false || $val == 0) {
-  	  	  	  $displayval = "Nej";
+  	  	  	  $displayval = "No";
   	  	  }
-  	  	  else $displayval = "Ja";
+  	  	  else $displayval = "Yes";
   	  	  
   	  	  break;
   	  	  

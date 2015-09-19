@@ -8,11 +8,6 @@
 require __DIR__.'/config_with_app.php'; 
 
 
-// $app->url->setUrlType(\Anax\Url\CUrl::URL_CLEAN); 
-
-$app->theme->configure(ANAX_APP_PATH . 'config/theme-grid.php');
-//$app->navbar->configure(ANAX_APP_PATH . 'config/navbar_theme.php');
-
 $di->set('table', '\Meax\HTMLTable\SimpleHTMLTable');
 
 
@@ -44,12 +39,45 @@ $app->router->add('', function() use ($app) {
     );
 
     $html = $app->table->createTable($columns, $data);
+    
+    $columns = array([
+      'name' => 'date',
+      'label' => 'Date',
+      'display' => 'convert-datestr',
+      'displayformat' => 'Y-m-d',
+    ],
+    [
+      'name' => 'title',
+      'label' => 'Title',
+            
+    ],
+    [
+      'name' => 'published',
+      'label' => 'Published',
+      'display' => 'yes-no',     
+    ],
+    );
+    
+    $data = array(
+      1 => [
+      'date' => '2015-05-15 12:14', 
+      'title' => 'A blog post',
+      'published' => true,
+       ],
+      2 => [
+      'date' => '2015-05-16 13:15', 
+      'title' => 'Another post',
+      'published' => false,
+       ],
+    );
+    
+    $html2 = $app->table->createTable($columns, $data);
  
     $app->theme->setTitle("Simple HTMLTable");
  
     $app->views->add('default/page', [
         'title' => "SimpleHTMLTable example",
-        'content' => "<p>SimpleHTMLTable is a module that helps create simple html tables.</p>" . $html
+        'content' => "<p>SimpleHTMLTable is a module that helps create simple html tables.</p><h4>Example 1</h4>" . $html ."<h4>Example 2</h4>". $html2
     ]);
     
 });
