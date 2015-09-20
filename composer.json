@@ -1,5 +1,5 @@
 {
-    "name": "meax/cform",    
+    "name": "meax/chtmltable",    
     "type": "library",
     "description": "Classes for HTML Table",
     "keywords": ["html", "tables", "education"],
