@@ -3,6 +3,7 @@
     "type": "library",
     "description": "Classes for HTML Table",
     "keywords": ["html", "tables", "education"],
+    "homepage": "http://mariajonsson.com",
     "license": "MIT",
     "authors": [
         {
