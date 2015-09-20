@@ -1,0 +1,21 @@
+{
+    "name": "meax/cform",    
+    "type": "library",
+    "description": "Classes for HTML Table",
+    "keywords": ["html", "tables", "education"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maria Jonsson",
+            "email": "maria@mariajonsson.com",
+            "homepage: "http://mariajonsson.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": { "Meax\\": "src/" }
+    }
+}
