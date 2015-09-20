@@ -3,6 +3,8 @@
 A HTML helper written in PHP to create a html table. Written for Anax-MVC.  
 First version includes the class `SimpleHTMLTable.php` and an example file, `simplehtmltable.php`.
 
+Move the example file into your Anax installation's webroot folder.
+
 ## How to build a table
 Method `createTable($columns, $data)`    
 Accepts a multiarray `$columns` representing the header row and the columns of the table.  
@@ -111,4 +113,4 @@ With the help of the method `getDisplayVal($val, $displaytype, $format)` it is p
        ],
     );
     
-**Have a look at the example file simplehtmltable.php**
+Have a look at the example file simplehtmltable.php to see what creating links and converting data looks like.
