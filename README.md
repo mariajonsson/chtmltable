@@ -1,9 +1,16 @@
 # chtmltable
 
 A HTML helper written in PHP to create a html table. Written for Anax-MVC.  
-First version includes the class `SimpleHTMLTable.php` and an example file, `simplehtmltable.php`.
+First version includes the class `SimpleHTMLTable.php` and an example file in webroot folder, `simplehtmltable.php`.
 
-Move the example file into your Anax installation's webroot folder.
+To install with Composer and Packagist add chtmltable to your composer.json file in Anax. 
+
+    "require": {
+        "php": ">=5.4",
+        "meax/chtmltable": "dev-master"
+    },
+
+Move the example file `simplehtmltable` into your Anax installation's webroot folder.
 
 ## How to build a table
 Method `createTable($columns, $data)`    
