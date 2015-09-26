@@ -93,38 +93,31 @@ class SimpleHTMLTable {
     */
 	
   public function getDisplayVal($val, $displaytype=null, $format=null) {
-  	  	
-  	switch ($displaytype) {
-  	  
-	case 'yes-no':
-	    if ($val === false || $val === 0) {
-  	    $displayval = "No";
-  	}
-  	  elseif (empty($val) || $val === null) {
-	    $displayval = "No";
-  	  }
-
-  	  else $displayval = "Yes";
-  	  break;
-  	  	  
-  	  case 'convert-datestr':
-	    if (isset($format)) {
-	      $displayval = date($format, strtotime($val));
-  	    }
-  	    else $displayval = $val;
-  	    break;
-  	  
-  	  default:
-  	  
-	    $displayval = $val;
-	    break;
-	    
-  	  }
-  	  return $displayval;
+  
+  switch ($displaytype) {
+    
+  case 'yes-no':
+    if ($val === false || $val === 0 || empty($val) || $val === null) {
+      $displayval = "No";
+    }
+    else { 
+      $displayval = "Yes";
+    }
+    break;
+  case 'convert-datestr':
+    if (isset($format)) {
+      $displayval = date($format, strtotime($val));
+    }
+    else {
+      $displayval = $val;
+    }
+    break;
+  
+  default:
+    $displayval = $val;
+  break;
   }
-  
-  
-
-
-  
+  return $displayval;
+  }
+ 
 }
