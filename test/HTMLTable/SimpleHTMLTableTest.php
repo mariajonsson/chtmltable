@@ -6,9 +6,9 @@ namespace Meax\HTMLTable;
   * Creates an HTML table from an array or object.
   *
   */
-class Foo{};
 class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
 {
+
 
 
   public function setUp() 
@@ -79,15 +79,15 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
        ],
     );
     
-    $object1 = new Foo();
+    $object1 = new \stdClass();
     $object1->fruits = 'Apple';
     $object1->animals = 'Horse';
     
-    $object2 = new Foo();
+    $object2 = new \stdClass();
     $object2->fruits = 'Banana';
     $object2->animals = 'Monkey';
     
-    $object3 = new Foo();
+    $object3 = new \stdClass();
     $object3->animals = 'Monkey';
     
     $this->valtwocolsObject = array($object1, $object2);
