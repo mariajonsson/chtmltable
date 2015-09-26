@@ -12,8 +12,6 @@ class SimpleHTMLTable {
   public function __construct() {
   }
 
-  
-
     /**
     * Build an html table
     *
@@ -22,62 +20,55 @@ class SimpleHTMLTable {
     * 
     */
 
-    public function createTable($columns, $values=null, $tablename=null) {
-    	
+  public function createTable($columns, $values=null, $tablename=null) {
+
     $html = "<table id='".$tablename."'>";
     $html .= "<tr>";
     
     foreach ($columns as $column) {
-    	$html .= "<th>".$column['label']."</th>";
+      $html .= "<th>".$column['label']."</th>";
     }
     $html .= "</tr>";
     
     if (!empty($values)) {
-    foreach ($values as $value) {
-    $html .= "<tr>";
-    
-    	foreach ($columns as $column) {
-    		$linkkey = null;
-    		$val = '';
+      foreach ($values as $value) {
+      $html .= "<tr>";
+      
+      foreach ($columns as $column) {
+	$linkkey = null;
+	$val = '';
+	if (is_object($value)) {
+	  if(isset($value->{$column['name']})) {
+	    $val = $value->{$column['name']};
+	  }
+	  if (isset($column['linkkey'])) {
+	    if (isset($value->{$column['linkkey']})) {
+	      $linkkey = $value->{$column['linkkey']};
+	    }
+	  }
+	}
+	elseif (is_array($value)) {
+	  if(isset($value[$column['name']])) {
+	    $val = $value[$column['name']];
+	  }
+	  if (isset($column['linkkey'])) {
+	    $linkkey = $value[$column['linkkey']];
+	  }
+	}
+	if (isset($column['display']) && isset($column['displayformat'])) {
+	  $val = $this->getDisplayVal($val, $column['display'], $column['displayformat']);
+	}
+	elseif (isset($column['display'])) {
+	  $val = $this->getDisplayVal($val, $column['display']);
+	}
 
-    		if (is_object($value)) {
-		  if(isset($value->{$column['name']})) {
-		    $val = $value->{$column['name']};
-		  }
-
-		  if (isset($column['linkkey'])) {
-		    if (isset($value->{$column['linkkey']})) {
-		    $linkkey = $value->{$column['linkkey']};
-		    }
-		  }
-    		}
-    		elseif (is_array($value)) {
-    		
-		if(isset($value[$column['name']])) {
-		  $val = $value[$column['name']];
-    		}
-
-    		if (isset($column['linkkey'])) {
-		  $linkkey = $value[$column['linkkey']];
-    		}
-    		}
-    		if (isset($column['display']) && isset($column['displayformat'])) {
-    		$val = $this->getDisplayVal($val, $column['display'], $column['displayformat']);
-    		}
-    		elseif (isset($column['display'])) {
-    		$val = $this->getDisplayVal($val, $column['display']);
-    		}
-
-    		$link = (isset($column['linkbase'])) ? '<a href="' .$column['linkbase'].$linkkey.'">' : null;
-    		$endlink = !empty($link) ? "</a>" : null;
-    		
-    		$html .= "<td>".$link.$val.$endlink."</td>";
-    		
-    	}
-    
-    $html .= "</tr>";
+	$link = (isset($column['linkbase'])) ? '<a href="' .$column['linkbase'].$linkkey.'">' : null;
+	$endlink = !empty($link) ? "</a>" : null;
+	$html .= "<td>".$link.$val.$endlink."</td>";
+	} 
+      $html .= "</tr>";
      
-    }
+      }
     }
     
     $html .= "</table>";
