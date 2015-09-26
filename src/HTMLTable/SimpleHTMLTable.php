@@ -39,23 +39,24 @@ class SimpleHTMLTable {
     	foreach ($columns as $column) {
     		$linkkey = null;
     		$val = '';
+
     		if (is_object($value)) {
 		  if(isset($value->{$column['name']})) {
 		    $val = $value->{$column['name']};
 		  }
-		  else $val = '';
-    		if (isset($column['linkkey'])) {
-		  if (isset($value->{$column['linkkey']})) {
-		  $linkkey = $value->{$column['linkkey']};
+
+		  if (isset($column['linkkey'])) {
+		    if (isset($value->{$column['linkkey']})) {
+		    $linkkey = $value->{$column['linkkey']};
+		    }
 		  }
-    		}
     		}
     		elseif (is_array($value)) {
     		
 		if(isset($value[$column['name']])) {
 		  $val = $value[$column['name']];
     		}
-    		else $val = '';
+
     		if (isset($column['linkkey'])) {
 		  $linkkey = $value[$column['linkkey']];
     		}
@@ -66,7 +67,7 @@ class SimpleHTMLTable {
     		elseif (isset($column['display'])) {
     		$val = $this->getDisplayVal($val, $column['display']);
     		}
-    		
+
     		$link = (isset($column['linkbase'])) ? '<a href="' .$column['linkbase'].$linkkey.'">' : null;
     		$endlink = !empty($link) ? "</a>" : null;
     		
