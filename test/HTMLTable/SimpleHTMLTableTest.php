@@ -13,7 +13,7 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
 
   public function setUp() 
   {
-  $this->tbl = new \Meax\HTMLTable\SimpleHTMLTable('test');
+  $this->tbl = new \Meax\HTMLTable\SimpleHTMLTable();
   $this->twocolumns = array([ 
     'name' => 'fruits', 
     'label' => 'Fruits'
