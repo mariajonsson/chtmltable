@@ -29,7 +29,7 @@ Accepts a multiarray or object `$data` which represents the rows of the table.
     ]);
   
 'name' - a value referring to a key in object or array `$data`   
-'label' - the label to place in between the <th></th> tags.
+'label' - the label to be placed in between the <th></th> tags.
 
 **Example `$data`**  
 
