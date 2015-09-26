@@ -37,7 +37,6 @@ class SimpleHTMLTable {
     $html .= "<tr>";
     
     	foreach ($columns as $column) {
-    		$link = null;
     		$linkkey = null;
     		$val = '';
     		if (is_object($value)) {
@@ -89,12 +88,11 @@ class SimpleHTMLTable {
     *
     * @param $val the value to convert
     * @param string $displaytype determines which switch case to go with
-    * @param string $format, which format to convert to, if any
+    * @param string $format which format to convert to, if any
     */
 	
   public function getDisplayVal($val, $displaytype=null, $format=null) {
-  	$displayval = $val;
-  	
+  	  	
   	switch ($displaytype) {
   	  
 	case 'yes-no':
@@ -115,7 +113,7 @@ class SimpleHTMLTable {
   	    else $displayval = $val;
   	    break;
   	  
-  	  default :
+  	  default:
   	  
 	    $displayval = $val;
 	    break;
