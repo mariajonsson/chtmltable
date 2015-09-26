@@ -40,19 +40,26 @@ class SimpleHTMLTable {
     		$link = null;
     		$linkkey = null;
     		$val = '';
-    		if (is_object($value)) { 
-    			$val = $value->{$column['name']};
-    			
-    			if (isset($column['linkkey'])) {
-    				$linkkey = $value->{$column['linkkey']};
-    			}
+    		if (is_object($value)) {
+		  if(isset($value->{$column['name']})) {
+		    $val = $value->{$column['name']};
+		  }
+		  else $val = '';
+    		if (isset($column['linkkey'])) {
+		  if (isset($value->{$column['linkkey']})) {
+		  $linkkey = $value->{$column['linkkey']};
+		  }
+    		}
     		}
     		elseif (is_array($value)) {
-    			
-    			$val = $value[$column['name']];
-    			if (isset($column['linkkey'])) {
-    				$linkkey = $value[$column['linkkey']];
-    			}
+    		
+		if(isset($value[$column['name']])) {
+		  $val = $value[$column['name']];
+    		}
+    		else $val = '';
+    		if (isset($column['linkkey'])) {
+		  $linkkey = $value[$column['linkkey']];
+    		}
     		}
     		if (isset($column['display']) && isset($column['displayformat'])) {
     		$val = $this->getDisplayVal($val, $column['display'], $column['displayformat']);
@@ -87,23 +94,38 @@ class SimpleHTMLTable {
 	
   public function getDisplayVal($val, $displaytype=null, $format=null) {
   	$displayval = $val;
-  	  switch ($displaytype) {
+  	
+  	switch ($displaytype) {
   	  
-  	  case 'yes-no':
-  	  	  if (empty($val) || $val === false || $val == 0) {
-  	  	  	  $displayval = "No";
-  	  	  }
-  	  	  else $displayval = "Yes";
-  	  	  
-  	  	  break;
+	case 'yes-no':
+	    if ($val === false || $val === 0) {
+  	    $displayval = "No";
+  	}
+  	  elseif (empty($val) || $val === null) {
+	    $displayval = "No";
+  	  }
+
+  	  else $displayval = "Yes";
+  	  break;
   	  	  
   	  case 'convert-datestr':
-  	  	  $displayval = date($format, strtotime($val));
-  	  	  
-  	  	  break;
+	    if (isset($format)) {
+	      $displayval = date($format, strtotime($val));
+  	    }
+  	    else $displayval = $val;
+  	    break;
+  	  
+  	  default :
+  	  
+	    $displayval = $val;
+	    break;
+	    
   	  }
   	  return $displayval;
   }
+  
+  
+
 
   
 }
