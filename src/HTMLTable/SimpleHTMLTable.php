@@ -81,22 +81,22 @@ class SimpleHTMLTable {
     foreach ($values as $value) {
       $html .= "<tr>";
       foreach ($columns as $column) {
-      $link = null;
       $val='';
 	if (is_object($value)) {
 	  $value = get_object_vars($value);
 	}
 	if(isset($value[$column['name']])) {
-	    $val = $value[$column['name']];	  
+	    $val = $value[$column['name']];
 	}
-	$link = $this->createLink($value, $column);
-    
+
 	if (isset($column['display'])) {
 	  $displayformat = isset($column['displayformat']) ? $column['displayformat'] : null;
 	  $val = $this->getDisplayVal($val, $column['display'], $displayformat);
 	}
-	$endlink = !empty($link) ? "</a>" : null;
-	$html .= "<td>".$link.$val.$endlink."</td>";
+	
+	$link = $this->createLink($value, $column, $val);
+
+	$html .= "<td>".$link."</td>";
       } 
       $html .= "</tr>"; 
     }
@@ -104,13 +104,13 @@ class SimpleHTMLTable {
   return $html;
   }
   
-  public function createLink($value, $column) 
+  public function createLink($value, $column, $text) 
   {
-  $link = null;
-  if (isset($column['linkbase'])) {
-
+  $link = $text;
+  if (isset($column['linkbase'])) 
+  {
     $linkkey = $this->getLinkkey($value, $column);
-    $link = '<a href="' .$column['linkbase'].$linkkey.'">';
+    $link = '<a href="' .$column['linkbase'].$linkkey.'">'.$text.'</a>';
   }
   return $link;
   
