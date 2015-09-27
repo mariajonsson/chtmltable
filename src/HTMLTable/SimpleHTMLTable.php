@@ -50,16 +50,14 @@ class SimpleHTMLTable {
     case 'yes-no':
       if ($val === false || $val === 0 || empty($val) || $val === null) {
         $displayval = "No";
-      }
-      else { 
+      } else { 
         $displayval = "Yes";
       }
       break;
     case 'convert-datestr':
       if (isset($format)) {
         $displayval = date($format, strtotime($val));
-      }
-      else {
+      } else {
         $displayval = $val;
       }
       break;
@@ -91,12 +89,12 @@ class SimpleHTMLTable {
   
   
   /**
-     * Creating a header row 
-     *
-     * @param array $columns containing column info
-     *
-     * @return string
-     */
+   * Creating a header row 
+   *
+   * @param array $columns containing column info
+   *
+   * @return string
+   */
   public function createHeader($columns)
   {
   $html = "<tr>";
@@ -109,22 +107,22 @@ class SimpleHTMLTable {
   }
   
   /**
-     * Creating rows 
-     *
-     * @param array $columns containing column info
-     * @param array $values data to go into the row
-     * @return string
-     */
+   * Creating rows 
+   *
+   * @param array $columns containing column info
+   * @param array $values data to go into the row
+   * @return string
+   */
   
   public function createRows($columns, $values)
   {
-   $html = '';
-   if (!empty($values)) 
+    $html = '';
+    if (!empty($values)) 
     {
     foreach ($values as $value) {
       
       if (is_object($value)) {
-	$value = get_object_vars($value);
+  $value = get_object_vars($value);
       }
       
       $html .= $this->createRow($columns, $value);
@@ -134,39 +132,39 @@ class SimpleHTMLTable {
   }
   
   /**
-     * Creating a row 
-     *
-     * @param array $columns containing column info
-     * @param array $value data to go into the row
-     * @return string
-     */
+   * Creating a row 
+   *
+   * @param array $columns containing column info
+   * @param array $value data to go into the row
+   * @return string
+   */
   
   public function createRow($columns, $value) 
   {
   $html = "<tr>";
   foreach ($columns as $column) {
     $val = $this->getValue($value, $column);
-	if (isset($column['display'])) {
-	  $format = $this->getDisplayFormat($column);
-	  $val = $this->getDisplayVal($val, $column['display'], $format);
-	}
-	
-	$link = $this->createLink($value, $column, $val);
+    if (isset($column['display'])) {
+      $format = $this->getDisplayFormat($column);
+      $val = $this->getDisplayVal($val, $column['display'], $format);
+    }
 
-	$html .= "<td>".$link."</td>";
+  $link = $this->createLink($value, $column, $val);
+
+  $html .= "<td>".$link."</td>";
       } 
       $html .= "</tr>"; 
   return $html;
   }
   
   /**
-     * Creating a link
-     *
-     * @param array $column containing column info
-     * @param array $value data to go into the row
-     * @param string $text the text for the link
-     * @return string
-     */
+   * Creating a link
+   *
+   * @param array $column containing column info
+   * @param array $value data to go into the row
+   * @param string $text the text for the link
+   * @return string
+   */
   
   public function createLink($value, $column, $text) 
   {
@@ -174,34 +172,34 @@ class SimpleHTMLTable {
   if (isset($column['linkbase'])) 
   {
     $linkkey = $this->getLinkkey($value, $column);
-    $link = '<a href="' .$column['linkbase'].$linkkey.'">'.$text.'</a>';
+    $link = '<a href="'.$column['linkbase'].$linkkey.'">'.$text.'</a>';
   }
   return $link;
   
   }
   
   /**
-     * Get the link key to create the link
-     *
-     * @param array $column containing column info
-     * @param array $row data to go into the row
-     * 
-     * @return string 
-     */
+   * Get the link key to create the link
+   *
+   * @param array $column containing column info
+   * @param array $row data to go into the row
+   * 
+   * @return string 
+   */
   
   public function getLinkkey($row, $column) 
   {
   $linkkey = null;
       if (isset($column['linkkey'])) {
-	if (isset($row[$column['linkkey']])) {
-	  $linkkey = $row[$column['linkkey']];
-	}
+  if (isset($row[$column['linkkey']])) {
+    $linkkey = $row[$column['linkkey']];
+  }
       }
   return $linkkey;
   
   }
   
-   /**
+    /**
      * Get the raw value to display
      *
      * @param array $column containing column info
@@ -212,8 +210,8 @@ class SimpleHTMLTable {
   
   public function getValue($value, $column)
   {
-  $val='';
-    if(isset($value[$column['name']])) {
+  $val = '';
+    if (isset($value[$column['name']])) {
       $val = $value[$column['name']];
     }
   return $val;
