@@ -84,17 +84,12 @@ class SimpleHTMLTable {
       $link = null;
       $val='';
 	if (is_object($value)) {
-	  if(isset($value->{$column['name']})) {
-	    $val = $value->{$column['name']};
-	  }
-	  $link = $this->createLink($value, $column, 'getLinkkeyObject');
+	  $value = get_object_vars($value);
 	}
-	elseif (is_array($value)) {
-	  if(isset($value[$column['name']])) {
-	    $val = $value[$column['name']];
-	  }
-	  $link = $this->createLink($value, $column, 'getLinkkeyArray');
+	if(isset($value[$column['name']])) {
+	    $val = $value[$column['name']];	  
 	}
+	$link = $this->createLink($value, $column);
     
 	if (isset($column['display'])) {
 	  $displayformat = isset($column['displayformat']) ? $column['displayformat'] : null;
@@ -109,33 +104,19 @@ class SimpleHTMLTable {
   return $html;
   }
   
-  public function createLink($value, $column, $method) 
+  public function createLink($value, $column) 
   {
   $link = null;
   if (isset($column['linkbase'])) {
 
-    $linkkey = $this->$method($value, $column);
+    $linkkey = $this->getLinkkey($value, $column);
     $link = '<a href="' .$column['linkbase'].$linkkey.'">';
   }
   return $link;
   
   }
   
-  public function getLinkkeyObject($value, $column) 
-  {
-  $linkkey = null;
-  if (isset($column['linkbase'])) {
-      if (isset($column['linkkey'])) {
-	if (isset($value->{$column['linkkey']})) {
-	  $linkkey = $value->{$column['linkkey']};
-	}
-      }
-  }
-  return $linkkey;
-  
-  }
-  
-  public function getLinkkeyArray($value, $column) 
+  public function getLinkkey($value, $column) 
   {
   $linkkey = null;
       if (isset($column['linkkey'])) {
