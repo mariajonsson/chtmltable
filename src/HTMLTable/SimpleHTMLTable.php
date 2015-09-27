@@ -35,7 +35,7 @@ class SimpleHTMLTable {
     /**
      * Support for converting values 
      *
-     * @param $val the value to convert
+     * @param mixed $val the value to convert
      * @param string $displaytype determines which switch case to go with
      * @param string $displayformat which format to convert to, if any
      * @return string
@@ -94,7 +94,7 @@ class SimpleHTMLTable {
      * Creating rows 
      *
      * @param array $columns containing column info
-     * @param array $value data to go into the row
+     * @param array $values data to go into the row
      * @return string
      */
   
