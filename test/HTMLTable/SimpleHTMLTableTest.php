@@ -43,10 +43,10 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
     'fruits' => 'Banana', 
     'animals' => 'Monkey'
     ]);
-    $this->valtwocolsonerow = array([
+    $this->valtwocolsonerow = [
     'fruits' => 'Apple', 
     'animals' => 'Horse'
-    ]);
+    ];
     
     $this->valtwocolsMissingval = array([
     'fruits' => 'Apple', 
@@ -142,9 +142,9 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
   
   }
   
-  public function testCreateRows() {
+  public function testCreateRow() {
   
-  $row = $this->tbl->createRows($this->twocolumns, $this->valtwocolsonerow);
+  $row = $this->tbl->createRow($this->twocolumns, $this->valtwocolsonerow);
   $this->assertEquals($row, '<tr><td>Apple</td><td>Horse</td></tr>');
   
   }

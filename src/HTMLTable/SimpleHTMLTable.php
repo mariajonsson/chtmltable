@@ -29,9 +29,15 @@ class SimpleHTMLTable {
       $html .= "<th>".$column['label']."</th>";
     }
     $html .= "</tr>";
-    
-    $html .= $this->createRows($columns, $values);
-    
+    if (!empty($values)) 
+    {
+    foreach ($values as $value) {
+      if (is_object($value)) {
+	$value = get_object_vars($value);
+      }
+      $html .= $this->createRow($columns, $value);
+    }
+    }
     $html .= "</table>";
     return $html;
   }
@@ -75,18 +81,11 @@ class SimpleHTMLTable {
   }
   
   
-  public function createRows($columns, $values) 
+  public function createRow($columns, $value) 
   {
-  $html = '';
-  if (!empty($values)) 
-  {
-    foreach ($values as $value) {
-      if (is_object($value)) {
-	$value = get_object_vars($value);
-      }
-      $html .= "<tr>";
-      foreach ($columns as $column) {
-	$val = $this->getValue($value, $column);
+  $html = "<tr>";
+  foreach ($columns as $column) {
+    $val = $this->getValue($value, $column);
 	if (isset($column['display'])) {
 	  $val = $this->getDisplayVal($val, $column['display'], null, $column);
 	}
@@ -96,8 +95,6 @@ class SimpleHTMLTable {
 	$html .= "<td>".$link."</td>";
       } 
       $html .= "</tr>"; 
-    }
-  }
   return $html;
   }
   
@@ -113,12 +110,12 @@ class SimpleHTMLTable {
   
   }
   
-  public function getLinkkey($value, $column) 
+  public function getLinkkey($row, $column) 
   {
   $linkkey = null;
       if (isset($column['linkkey'])) {
-	if (isset($value[$column['linkkey']])) {
-	  $linkkey = $value[$column['linkkey']];
+	if (isset($row[$column['linkkey']])) {
+	  $linkkey = $row[$column['linkkey']];
 	}
       }
   return $linkkey;
@@ -128,7 +125,6 @@ class SimpleHTMLTable {
   public function getValue($value, $column)
   {
   $val='';
-    
     if(isset($value[$column['name']])) {
       $val = $value[$column['name']];
     }
