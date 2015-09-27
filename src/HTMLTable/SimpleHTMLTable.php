@@ -42,10 +42,9 @@ class SimpleHTMLTable {
      * @return string
      */
 	
-  public function getDisplayVal($val, $displaytype = null, $displayformat = null, $column = null) {
+  public function getDisplayVal($val, $displaytype = null, $format = null) {
   
-  $format = isset($column['displayformat']) ? $column['displayformat'] : $displayformat;
-  
+   
   switch ($displaytype) {
     
     case 'yes-no':
@@ -70,6 +69,24 @@ class SimpleHTMLTable {
     break;
   }
   return $displayval;
+  }
+  
+  /**
+    * Get displayformat 
+    *
+    * @param array $column containing column info
+    *
+    * @return string
+    */
+
+  public function getDisplayFormat($column) 
+  {
+  $format = null;
+  if (isset($column['displayformat'])) 
+  {
+    $format = $column['displayformat'];
+  }
+  return $format;
   }
   
   
@@ -130,7 +147,8 @@ class SimpleHTMLTable {
   foreach ($columns as $column) {
     $val = $this->getValue($value, $column);
 	if (isset($column['display'])) {
-	  $val = $this->getDisplayVal($val, $column['display'], null, $column);
+	  $format = $this->getDisplayFormat($column);
+	  $val = $this->getDisplayVal($val, $column['display'], $format);
 	}
 	
 	$link = $this->createLink($value, $column, $val);
