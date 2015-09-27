@@ -43,6 +43,11 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
     'fruits' => 'Banana', 
     'animals' => 'Monkey'
     ]);
+    $this->valtwocolsonerow = array([
+    'fruits' => 'Apple', 
+    'animals' => 'Horse'
+    ]);
+    
     $this->valtwocolsMissingval = array([
     'fruits' => 'Apple', 
     'animals' => 'Horse'
@@ -137,6 +142,13 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
   
   }
   
+  public function testCreateRows() {
+  
+  $row = $this->tbl->createRows($this->twocolumns, $this->valtwocolsonerow);
+  $this->assertEquals($row, '<tr><td>Apple</td><td>Horse</td></tr>');
+  
+  }
+  
     /**
      * Test case default for DisplayVal
      *
@@ -149,9 +161,12 @@ class SimpleHTMLTableTest extends \PHPUnit_Framework_TestCase
   
     $display = $this->tbl->getDisplayVal('Hello');
     $this->assertEquals($display, 'Hello');
+    $display = $this->tbl->getDisplayVal("value", null, null);
+    $this->assertEquals($display, 'value');
   
   }
   
+ 
   /**
    * Test case 'yes-no' for DisplayVal with result "Yes"
    *

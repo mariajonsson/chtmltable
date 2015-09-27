@@ -30,46 +30,7 @@ class SimpleHTMLTable {
     }
     $html .= "</tr>";
     
-    if (!empty($values)) {
-      foreach ($values as $value) {
-      $html .= "<tr>";
-      
-      foreach ($columns as $column) {
-  $linkkey = null;
-  $val = '';
-  if (is_object($value)) {
-    if(isset($value->{$column['name']})) {
-      $val = $value->{$column['name']};
-    }
-    if (isset($column['linkkey'])) {
-      if (isset($value->{$column['linkkey']})) {
-        $linkkey = $value->{$column['linkkey']};
-      }
-    }
-  }
-  elseif (is_array($value)) {
-    if(isset($value[$column['name']])) {
-      $val = $value[$column['name']];
-    }
-    if (isset($column['linkkey'])) {
-      $linkkey = $value[$column['linkkey']];
-    }
-  }
-  if (isset($column['display']) && isset($column['displayformat'])) {
-    $val = $this->getDisplayVal($val, $column['display'], $column['displayformat']);
-  }
-  elseif (isset($column['display'])) {
-    $val = $this->getDisplayVal($val, $column['display']);
-  }
-
-  $link = (isset($column['linkbase'])) ? '<a href="' .$column['linkbase'].$linkkey.'">' : null;
-  $endlink = !empty($link) ? "</a>" : null;
-  $html .= "<td>".$link.$val.$endlink."</td>";
-  } 
-      $html .= "</tr>";
-     
-      }
-    }
+    $html .= $this->createRows($columns, $values);
     
     $html .= "</table>";
     return $html;
@@ -109,6 +70,67 @@ class SimpleHTMLTable {
     break;
   }
   return $displayval;
+  }
+  
+  
+  public function createRows($columns, $values) 
+  {
+  $html = '';
+  if (!empty($values)) 
+  {
+    foreach ($values as $value) {
+      $html .= "<tr>";
+      foreach ($columns as $column) {
+      $val='';
+	if (is_object($value)) {
+	  if(isset($value->{$column['name']})) {
+	    $val = $value->{$column['name']};
+	  }
+	}
+	elseif (is_array($value)) {
+	  if(isset($value[$column['name']])) {
+	    $val = $value[$column['name']];
+	  }
+	}
+	$link = $this->createLink($value, $column);
+      
+
+	$display = isset($column['display']) ? $column['display'] : null;
+	$displayformat = isset($column['displayformat']) ? $column['displayformat'] : null;
+	$val = $this->getDisplayVal($val, $display, $displayformat);
+	
+	$endlink = !empty($link) ? "</a>" : null;
+	$html .= "<td>".$link.$val.$endlink."</td>";
+      } 
+      $html .= "</tr>"; 
+    }
+  }
+  return $html;
+  }
+  
+  public function createLink($value, $column) 
+  {
+  $link = null;
+  if (isset($column['linkbase'])) {
+    $linkkey = null;
+    if (is_object($value)) {
+      if (isset($column['linkkey'])) {
+	if (isset($value->{$column['linkkey']})) {
+	  $linkkey = $value->{$column['linkkey']};
+	}
+      }
+    }
+    elseif (is_array($value)) {
+      if (isset($column['linkkey'])) {
+	if (isset($value[$column['linkkey']])) {
+	  $linkkey = $value[$column['linkkey']];
+	}
+      }
+    }
+    $link = '<a href="' .$column['linkbase'].$linkkey.'">';
+  }
+  return $link;
+  
   }
  
 }
