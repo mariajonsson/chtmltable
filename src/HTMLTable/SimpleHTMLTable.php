@@ -47,7 +47,7 @@ class SimpleHTMLTable {
      *
      * @param $val the value to convert
      * @param string $displaytype determines which switch case to go with
-     * @param string $format which format to convert to, if any
+     * @param string $displayformat which format to convert to, if any
      */
 	
   public function getDisplayVal($val, $displaytype = null, $displayformat = null, $column = null) {
@@ -80,6 +80,13 @@ class SimpleHTMLTable {
   return $displayval;
   }
   
+  /**
+     * Creating a row 
+     *
+     * @param array $columns containing column info
+     * @param array $value data to go into the row
+     * @return $html representation of a table row
+     */
   
   public function createRow($columns, $value) 
   {
@@ -98,6 +105,15 @@ class SimpleHTMLTable {
   return $html;
   }
   
+  /**
+     * Creating a link
+     *
+     * @param array $columns containing column info
+     * @param array $value data to go into the row
+     * @param string $text the text for the link
+     * @return $link html representation of a link
+     */
+  
   public function createLink($value, $column, $text) 
   {
   $link = $text;
@@ -110,6 +126,15 @@ class SimpleHTMLTable {
   
   }
   
+  /**
+     * Get the link key to create the link
+     *
+     * @param array $columns containing column info
+     * @param array $row data to go into the row
+     * 
+     * @return $linkkey 
+     */
+  
   public function getLinkkey($row, $column) 
   {
   $linkkey = null;
@@ -121,6 +146,15 @@ class SimpleHTMLTable {
   return $linkkey;
   
   }
+  
+   /**
+     * Get the raw value to display
+     *
+     * @param array $columns containing column info
+     * @param array $value data to go into the row
+     * 
+     * @return $val 
+     */
   
   public function getValue($value, $column)
   {
