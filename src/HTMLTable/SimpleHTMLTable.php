@@ -17,7 +17,7 @@ class SimpleHTMLTable {
      *
      * @param array $columns containing label and corresponding name
      * @param array $values or @param object $values containing the data
-     * 
+     * @return string
      */
 
   public function createTable($columns, $values = null, $tablename = null) {
@@ -48,6 +48,7 @@ class SimpleHTMLTable {
      * @param $val the value to convert
      * @param string $displaytype determines which switch case to go with
      * @param string $displayformat which format to convert to, if any
+     * @return string
      */
 	
   public function getDisplayVal($val, $displaytype = null, $displayformat = null, $column = null) {
@@ -85,7 +86,7 @@ class SimpleHTMLTable {
      *
      * @param array $columns containing column info
      * @param array $value data to go into the row
-     * @return $html representation of a table row
+     * @return string
      */
   
   public function createRow($columns, $value) 
@@ -108,10 +109,10 @@ class SimpleHTMLTable {
   /**
      * Creating a link
      *
-     * @param array $columns containing column info
+     * @param array $column containing column info
      * @param array $value data to go into the row
      * @param string $text the text for the link
-     * @return $link html representation of a link
+     * @return string
      */
   
   public function createLink($value, $column, $text) 
@@ -129,10 +130,10 @@ class SimpleHTMLTable {
   /**
      * Get the link key to create the link
      *
-     * @param array $columns containing column info
+     * @param array $column containing column info
      * @param array $row data to go into the row
      * 
-     * @return $linkkey 
+     * @return string 
      */
   
   public function getLinkkey($row, $column) 
@@ -153,7 +154,7 @@ class SimpleHTMLTable {
      * @param array $columns containing column info
      * @param array $value data to go into the row
      * 
-     * @return $val 
+     * @return string 
      */
   
   public function getValue($value, $column)
