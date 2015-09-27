@@ -44,7 +44,9 @@ class SimpleHTMLTable {
      * @param string $format which format to convert to, if any
      */
 	
-  public function getDisplayVal($val, $displaytype = null, $format = null) {
+  public function getDisplayVal($val, $displaytype = null, $displayformat = null, $column = null) {
+  
+  $format = isset($column['displayformat']) ? $column['displayformat'] : $displayformat;
   
   switch ($displaytype) {
     
@@ -79,19 +81,14 @@ class SimpleHTMLTable {
   if (!empty($values)) 
   {
     foreach ($values as $value) {
+      if (is_object($value)) {
+	$value = get_object_vars($value);
+      }
       $html .= "<tr>";
       foreach ($columns as $column) {
-      $val='';
-	if (is_object($value)) {
-	  $value = get_object_vars($value);
-	}
-	if(isset($value[$column['name']])) {
-	    $val = $value[$column['name']];
-	}
-
+	$val = $this->getValue($value, $column);
 	if (isset($column['display'])) {
-	  $displayformat = isset($column['displayformat']) ? $column['displayformat'] : null;
-	  $val = $this->getDisplayVal($val, $column['display'], $displayformat);
+	  $val = $this->getDisplayVal($val, $column['display'], null, $column);
 	}
 	
 	$link = $this->createLink($value, $column, $val);
@@ -126,6 +123,16 @@ class SimpleHTMLTable {
       }
   return $linkkey;
   
+  }
+  
+  public function getValue($value, $column)
+  {
+  $val='';
+    
+    if(isset($value[$column['name']])) {
+      $val = $value[$column['name']];
+    }
+  return $val;
   }
  
 }
