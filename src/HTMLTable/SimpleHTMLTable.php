@@ -38,7 +38,7 @@ class SimpleHTMLTable {
      *
      * @param mixed $val the value to convert
      * @param string $displaytype determines which switch case to go with
-     * @param string $displayformat which format to convert to, if any
+     * @param string $format which format to convert to, if any
      * @return string
      */
 	
@@ -48,18 +48,10 @@ class SimpleHTMLTable {
   switch ($displaytype) {
     
     case 'yes-no':
-      if ($val === false || $val === 0 || empty($val) || $val === null) {
-        $displayval = "No";
-      } else { 
-        $displayval = "Yes";
-      }
+      $displayval = $this->getDisplayYesNoType($val);
       break;
     case 'convert-datestr':
-      if (isset($format)) {
-        $displayval = date($format, strtotime($val));
-      } else {
-        $displayval = $val;
-      }
+      $displayval = $this->getDisplayDatestrType($val, $format);
       break;
   
     default:
@@ -85,6 +77,43 @@ class SimpleHTMLTable {
     $format = $column['displayformat'];
   }
   return $format;
+  }
+  
+  /**
+    * Get displayvalue of type yes or no 
+    *
+    * @param mixed $val the value to modify
+    *
+    * @return string
+    */
+  
+  public function getDisplayYesNoType($val)
+  {
+  if ($val === false || $val === 0 || empty($val) || $val === null) {
+        $displayval = "No";
+      } else { 
+        $displayval = "Yes";
+      }
+      
+   return $displayval;
+  }
+  
+  /**
+    * Get displayvalue of type date string 
+    *
+    * @param mixed $val the value to modify
+    * @param string $format the format to convert string into
+    *
+    * @return string
+    */
+  public function getDisplayDatestrType($val, $format)
+  {
+  if (isset($format)) {
+        $displayval = date($format, strtotime($val));
+      } else {
+        $displayval = $val;
+      }
+  return $displayval;
   }
   
   
