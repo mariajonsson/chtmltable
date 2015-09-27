@@ -81,24 +81,25 @@ class SimpleHTMLTable {
     foreach ($values as $value) {
       $html .= "<tr>";
       foreach ($columns as $column) {
+      $link = null;
       $val='';
 	if (is_object($value)) {
 	  if(isset($value->{$column['name']})) {
 	    $val = $value->{$column['name']};
 	  }
+	  $link = $this->createLink($value, $column, 'getLinkkeyObject');
 	}
 	elseif (is_array($value)) {
 	  if(isset($value[$column['name']])) {
 	    $val = $value[$column['name']];
 	  }
+	  $link = $this->createLink($value, $column, 'getLinkkeyArray');
 	}
-	$link = $this->createLink($value, $column);
-      
-
-	$display = isset($column['display']) ? $column['display'] : null;
-	$displayformat = isset($column['displayformat']) ? $column['displayformat'] : null;
-	$val = $this->getDisplayVal($val, $display, $displayformat);
-	
+    
+	if (isset($column['display'])) {
+	  $displayformat = isset($column['displayformat']) ? $column['displayformat'] : null;
+	  $val = $this->getDisplayVal($val, $column['display'], $displayformat);
+	}
 	$endlink = !empty($link) ? "</a>" : null;
 	$html .= "<td>".$link.$val.$endlink."</td>";
       } 
@@ -108,28 +109,41 @@ class SimpleHTMLTable {
   return $html;
   }
   
-  public function createLink($value, $column) 
+  public function createLink($value, $column, $method) 
   {
   $link = null;
   if (isset($column['linkbase'])) {
-    $linkkey = null;
-    if (is_object($value)) {
+
+    $linkkey = $this->$method($value, $column);
+    $link = '<a href="' .$column['linkbase'].$linkkey.'">';
+  }
+  return $link;
+  
+  }
+  
+  public function getLinkkeyObject($value, $column) 
+  {
+  $linkkey = null;
+  if (isset($column['linkbase'])) {
       if (isset($column['linkkey'])) {
 	if (isset($value->{$column['linkkey']})) {
 	  $linkkey = $value->{$column['linkkey']};
 	}
       }
-    }
-    elseif (is_array($value)) {
+  }
+  return $linkkey;
+  
+  }
+  
+  public function getLinkkeyArray($value, $column) 
+  {
+  $linkkey = null;
       if (isset($column['linkkey'])) {
 	if (isset($value[$column['linkkey']])) {
 	  $linkkey = $value[$column['linkkey']];
 	}
       }
-    }
-    $link = '<a href="' .$column['linkbase'].$linkkey.'">';
-  }
-  return $link;
+  return $linkkey;
   
   }
  
