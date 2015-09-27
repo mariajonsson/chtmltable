@@ -16,11 +16,12 @@ class SimpleHTMLTable {
      * Build an html table
      *
      * @param array $columns containing label and corresponding name
-     * @param array $values or @param object $values containing the data
+     * @param string $tablename - a css id for the html table
+     * @param array $values containing the data
      * @return string
      */
 
-  public function createTable($columns, $values = null, $tablename = null) {
+  public function createTable($columns, $values = [], $tablename = '') {
 
     $html = "<table id='".$tablename."'>";
     
