@@ -23,21 +23,11 @@ class SimpleHTMLTable {
   public function createTable($columns, $values = null, $tablename = null) {
 
     $html = "<table id='".$tablename."'>";
-    $html .= "<tr>";
     
-    foreach ($columns as $column) {
-      $html .= "<th>".$column['label']."</th>";
-    }
-    $html .= "</tr>";
-    if (!empty($values)) 
-    {
-    foreach ($values as $value) {
-      if (is_object($value)) {
-	$value = get_object_vars($value);
-      }
-      $html .= $this->createRow($columns, $value);
-    }
-    }
+    $html .= $this->createHeader($columns);
+    
+    $html .= $this->createRows($columns, $values);
+   
     $html .= "</table>";
     return $html;
   }
@@ -79,6 +69,50 @@ class SimpleHTMLTable {
     break;
   }
   return $displayval;
+  }
+  
+  
+  /**
+     * Creating a header row 
+     *
+     * @param array $columns containing column info
+     *
+     * @return string
+     */
+  public function createHeader($columns)
+  {
+  $html = "<tr>";
+    
+    foreach ($columns as $column) {
+      $html .= "<th>".$column['label']."</th>";
+    }
+    $html .= "</tr>";
+  return $html;  
+  }
+  
+  /**
+     * Creating rows 
+     *
+     * @param array $columns containing column info
+     * @param array $value data to go into the row
+     * @return string
+     */
+  
+  public function createRows($columns, $values)
+  {
+   $html = '';
+   if (!empty($values)) 
+    {
+    foreach ($values as $value) {
+      
+      if (is_object($value)) {
+	$value = get_object_vars($value);
+      }
+      
+      $html .= $this->createRow($columns, $value);
+    }
+    }
+    return $html;
   }
   
   /**
@@ -151,7 +185,7 @@ class SimpleHTMLTable {
    /**
      * Get the raw value to display
      *
-     * @param array $columns containing column info
+     * @param array $column containing column info
      * @param array $value data to go into the row
      * 
      * @return string 
