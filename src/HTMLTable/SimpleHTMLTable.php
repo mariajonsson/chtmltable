@@ -89,7 +89,7 @@ class SimpleHTMLTable {
   
   public function getDisplayYesNoType($val)
   {
-  if ($val === false || $val === 0 || empty($val) || $val === null) {
+  if (empty($val)) {
         $displayval = "No";
       } else { 
         $displayval = "Yes";
