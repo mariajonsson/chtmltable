@@ -62,12 +62,12 @@ class SimpleHTMLTable {
   }
   
   /**
-    * Get displayformat 
-    *
-    * @param array $column containing column info
-    *
-    * @return string
-    */
+   * Get displayformat 
+   *
+   * @param array $column containing column info
+   *
+   * @return string
+   */
 
   public function getDisplayFormat($column) 
   {
@@ -80,12 +80,12 @@ class SimpleHTMLTable {
   }
   
   /**
-    * Get displayvalue of type yes or no 
-    *
-    * @param mixed $val the value to modify
-    *
-    * @return string
-    */
+   * Get displayvalue of type yes or no 
+   *
+   * @param mixed $val the value to modify
+   *
+   * @return string
+   */
   
   public function getDisplayYesNoType($val)
   {
@@ -95,17 +95,17 @@ class SimpleHTMLTable {
         $displayval = "Yes";
       }
       
-   return $displayval;
+    return $displayval;
   }
   
   /**
-    * Get displayvalue of type date string 
-    *
-    * @param mixed $val the value to modify
-    * @param string $format the format to convert string into
-    *
-    * @return string
-    */
+   * Get displayvalue of type date string 
+   *
+   * @param mixed $val the value to modify
+   * @param string $format the format to convert string into
+   *
+   * @return string
+   */
   public function getDisplayDatestrType($val, $format)
   {
   if (isset($format)) {
