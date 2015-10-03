@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mariajonsson/chtmltable.svg?branch=v2)](https://travis-ci.org/mariajonsson/chtmltable)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mariajonsson/chtmltable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mariajonsson/chtmltable/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/mariajonsson/chtmltable/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mariajonsson/chtmltable/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/mariajonsson/chtmltable/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mariajonsson/chtmltable/build-status/master)
 
 # chtmltable
 
