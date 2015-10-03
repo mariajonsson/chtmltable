@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mariajonsson/chtmltable.svg?branch=v2)](https://travis-ci.org/mariajonsson/chtmltable)
+
 # chtmltable
 
 A HTML helper written in PHP to create a html table. Written for Anax-MVC.  
